@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Página de Vendas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cor-fundo: #0d1117;
+            --cor-fundo-secundario: #161b22;
+            --cor-borda: #30363d;
+            --cor-texto-principal: #e6edf3;
+            --cor-texto-secundario: #8b949e;
+            --cor-destaque: #58a6ff;
+            --gradiente-botao: linear-gradient(45deg, #238636, #2ea043);
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto-principal);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            background-color: var(--cor-fundo-secundario);
+            padding: 40px;
+            border-radius: 15px;
+            border: 1px solid var(--cor-borda);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 500px;
+        }
+        h1 {
+            text-align: center;
+            color: var(--cor-destaque);
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--cor-texto-secundario);
+            font-weight: 600;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid var(--cor-borda);
+            background: var(--cor-fundo);
+            color: var(--cor-texto-principal);
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+        }
+        input:focus {
+            outline: none;
+            border-color: var(--cor-destaque);
+        }
+        .btn {
+            background: var(--gradiente-botao);
+            color: white;
+            padding: 15px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+        .resultado {
+            margin-top: 30px;
+            background: var(--cor-fundo);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--cor-borda);
+            display: none; /* Começa escondido */
+        }
+        .resultado p {
+            color: var(--cor-texto-secundario);
+            margin-bottom: 10px;
+        }
+        .resultado input {
+            background-color: #22272e;
+            margin-bottom: 15px;
+        }
+        .copy-btn {
+            background: var(--cor-destaque);
+            width: auto;
+            padding: 10px 20px;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Gerador de Link</h1>
+        <form id="geradorForm">
+            <div class="form-group">
+                <label for="nomeEmpresa">Nome da sua Empresa</label>
+                <input type="text" id="nomeEmpresa" placeholder="Ex: Inove Premium" required>
+            </div>
+            <div class="form-group">
+                <label for="whatsapp">Seu WhatsApp (com código do país)</label>
+                <input type="text" id="whatsapp" placeholder="Ex: 5511912345678" required>
+            </div>
+             <div class="form-group">
+                <label for="precoMensal">Preço do Plano Mensal</label>
+                <input type="number" step="0.01" id="precoMensal" placeholder="Ex: 29.90" required>
+            </div>
+             <div class="form-group">
+                <label for="precoAnual">Preço do Plano Anual</label>
+                <input type="number" step="0.01" id="precoAnual" placeholder="Ex: 249.90" required>
+            </div>
+             <div class="form-group">
+                <label for="precoTrimestral">Preço do Plano Trimestral</label>
+                <input type="number" step="0.01" id="precoTrimestral" placeholder="Ex: 79.90" required>
+            </div>
+            <button type="submit" class="btn">Gerar Meu Link</button>
+        </form>
+
+        <div id="resultado" class="resultado">
+            <p>✅ Seu link personalizado foi gerado!</p>
+            <input type="text" id="linkGerado" readonly>
+            <button id="copiarLink" class="btn copy-btn">Copiar Link</button>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('geradorForm');
+        const resultadoDiv = document.getElementById('resultado');
+        const linkGeradoInput = document.getElementById('linkGerado');
+        const copiarBtn = document.getElementById('copiarLink');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Pegar os valores dos campos
+            const nome = document.getElementById('nomeEmpresa').value;
+            const zap = document.getElementById('whatsapp').value;
+            const p1 = document.getElementById('precoMensal').value;
+            const p2 = document.getElementById('precoAnual').value;
+            const p3 = document.getElementById('precoTrimestral').value;
+
+            // Montar a URL base (IMPORTANTE: Mude para a URL onde seu site estará hospedado)
+            const baseUrl = 'https://sitestreamings.netlify.app/pagina_de_vendas.html';
+
+            // ... código anterior ...
+// Criar um objeto com os dados
+const dadosDoLink = {
+    nome: nome,
+    zap: zap,
+    p1: p1,
+    p2: p2,
+    p3: p3
+};
+
+// Armazenar os dados no localStorage
+localStorage.setItem('dadosVenda', JSON.stringify(dadosDoLink));
+
+// Montar a URL final sem os parâmetros
+// IMPORTANTE: Mantenha o seu domínio aqui
+const urlFinal = 'https://sitestreamings.netlify.app/pagina_de_vendas.html';
+
+// Exibir o resultado
+linkGeradoInput.value = urlFinal;
+// ... código posterior ...
+
+            // Exibir o resultado
+            linkGeradoInput.value = urlFinal;
+            resultadoDiv.style.display = 'block';
+        });
+
+        copiarBtn.addEventListener('click', function() {
+            linkGeradoInput.select();
+            document.execCommand('copy');
+            copiarBtn.textContent = 'Copiado!';
+            setTimeout(() => {
+                copiarBtn.textContent = 'Copiar Link';
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
