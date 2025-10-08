@@ -64,6 +64,11 @@
             outline: none;
             border-color: var(--cor-destaque);
         }
+        input[type="color"] {
+            padding: 5px;
+            height: 50px;
+            cursor: pointer;
+        }
         .btn {
             background: var(--gradiente-botao);
             color: white;
@@ -107,11 +112,11 @@
 <body>
 
     <div class="container">
-        <h1>Gerador Site Inove</h1>
+        <h1>Gerador de Site de Vendas</h1>
         <form id="geradorForm">
             <div class="form-group">
                 <label for="nomeEmpresa">Nome da sua Empresa</label>
-                <input type="text" id="nomeEmpresa" placeholder="Ex: Inove Tv" required>
+                <input type="text" id="nomeEmpresa" placeholder="Ex: Kzão TV" required>
             </div>
             <div class="form-group">
                 <label for="whatsapp">Seu WhatsApp (com código do país)</label>
@@ -128,6 +133,10 @@
              <div class="form-group">
                 <label for="precoTrimestral">Preço do Plano Trimestral</label>
                 <input type="number" step="0.01" id="precoTrimestral" placeholder="Ex: 79.90" required>
+            </div>
+            <div class="form-group">
+                <label for="corSite">Cor Principal do Site</label>
+                <input type="color" id="corSite" value="#58a6ff">
             </div>
             <button type="submit" class="btn">Gerar Meu Link</button>
         </form>
@@ -148,20 +157,21 @@
         form.addEventListener('submit', function(event) {
             event.preventDefault();
 
-            // Pegar os valores dos campos
             const nome = document.getElementById('nomeEmpresa').value;
             const zap = document.getElementById('whatsapp').value;
             const p1 = document.getElementById('precoMensal').value;
             const p2 = document.getElementById('precoAnual').value;
             const p3 = document.getElementById('precoTrimestral').value;
+            const cor = document.getElementById('corSite').value;
 
-            // Montar a URL base (IMPORTANTE: Mude para a URL onde seu site estará hospedado)
-            const baseUrl = 'https://siterev.pages.dev/pagina_de_vendas.html';
+            // ==========================================================================================
+            // ATENÇÃO! PASSO CRÍTICO!
+            // Substitua a URL abaixo pelo link ONDE a sua "pagina_de_vendas.html" estará hospedada!
+            // ==========================================================================================
+            const baseUrl = 'https://SEU-SITE-AQUI.COM/pagina_de_vendas.html';
 
-            // Criar a URL com os parâmetros
-            const urlFinal = `${baseUrl}?nome=${encodeURIComponent(nome)}&zap=${encodeURIComponent(zap)}&p1=${encodeURIComponent(p1)}&p2=${encodeURIComponent(p2)}&p3=${encodeURIComponent(p3)}`;
+            const urlFinal = `${baseUrl}?nome=${encodeURIComponent(nome)}&zap=${encodeURIComponent(zap)}&p1=${encodeURIComponent(p1)}&p2=${encodeURIComponent(p2)}&p3=${encodeURIComponent(p3)}&cor=${encodeURIComponent(cor)}`;
 
-            // Exibir o resultado
             linkGeradoInput.value = urlFinal;
             resultadoDiv.style.display = 'block';
         });
