@@ -85,6 +85,24 @@
             opacity: 0.9;
             transform: translateY(-2px);
         }
+        
+        /* ESTILOS PARA O LINK DE AJUDA */
+        .help-link-container {
+            text-align: center;
+            margin-top: -15px; /* Puxa um pouco para cima */
+            margin-bottom: 25px; /* Espaço antes do formulário */
+        }
+        .help-link {
+            color: var(--cor-texto-secundario);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+        .help-link:hover {
+            color: var(--cor-destaque);
+            text-decoration: underline;
+        }
+
         .resultado {
             margin-top: 30px;
             background: var(--cor-fundo);
@@ -113,6 +131,13 @@
 
     <div class="container">
         <h1>Gerador de Site Inove</h1>
+
+        <div class="help-link-container">
+            <a href="SEU_LINK_DO_VIDEO_AQUI" target="_blank" rel="noopener noreferrer" class="help-link">
+                ❓ Como usar? Assista ao vídeo tutorial.
+            </a>
+        </div>
+
         <form id="geradorForm">
             <div class="form-group">
                 <label for="nomeEmpresa">Nome da sua Empresa</label>
@@ -188,4 +213,3 @@
 </body>
 
 </html>
-
